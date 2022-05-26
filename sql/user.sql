@@ -1,7 +1,10 @@
--- guestbook
+-- UserRepository
 
-desc guestbook;
+desc user;
 
-select no, name, password, message, reg_date
-	from guestbook
-    order by reg_date;
+insert 
+	into user
+	values(null, '관리자', 'admin@mysite.com', '1234', 'male', now());
+    
+select *
+	from user;

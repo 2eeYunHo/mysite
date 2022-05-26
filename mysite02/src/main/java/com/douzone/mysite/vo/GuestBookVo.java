@@ -1,12 +1,12 @@
 package com.douzone.mysite.vo;
 
 public class GuestBookVo {
-	private long no;
+	private Long no;
 	private String name;
 	private String password;
 	private String message;
 	private String reg_date;
-	public long getNo() {
+	public Long getNo() {
 		return no;
 	}
 	public void setNo(long no) {

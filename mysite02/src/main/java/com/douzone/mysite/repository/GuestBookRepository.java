@@ -61,7 +61,7 @@ public class GuestBookRepository {
 			
 			//3. SQL 준비
 			String sql =
-					"select no, name,date_format(reg_date, '%Y-%m-%d %H:%i:%s'), message"
+					"select no, name, date_format(reg_date, '%Y-%m-%d %H:%i:%s'), message"
 					+" from guestbook"
 				    +" order by no asc";
 			pstmt = connection.prepareStatement(sql);
@@ -75,14 +75,14 @@ public class GuestBookRepository {
 			while(rs.next()) {
 				Long no = rs.getLong(1);
 				String name = rs.getString(2);
-				String password = rs.getString(3);
+				String reg_date = rs.getString(3);
 				String message = rs.getString(4);
 
 				
 				GuestBookVo vo = new GuestBookVo();
 				vo.setNo(no);
 				vo.setName(name);
-				vo.setPassword(password);
+				vo.setReg_date(reg_date);
 				vo.setMessage(message);
 				result.add(vo);
 			}
@@ -116,8 +116,8 @@ public class GuestBookRepository {
 			
 			String sql =
 			"delete from guestbook" +
-			" where no = ?" +
-			" and password = ?";
+			" where no=?" +
+			" and password=?";
 			pstmt = connection.prepareStatement(sql);
 
 			pstmt.setLong(1, vo.getNo());

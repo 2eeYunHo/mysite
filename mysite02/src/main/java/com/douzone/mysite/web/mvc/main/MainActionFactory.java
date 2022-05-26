@@ -9,5 +9,4 @@ public class MainActionFactory extends ActionFactory {
 	public Action getAction(String actionName) {
 		return new DefaultAction();
 	}
-
 }
