@@ -16,5 +16,8 @@ select no, name
 -- findByno
 select no, name, email, gender
 	from user
-	where no = '3' 
+	where name = 'qwe' 
     and password = 'qwe';
+
+update user set name, password, gender
+	where name = ?, password = ?, gender = ?;

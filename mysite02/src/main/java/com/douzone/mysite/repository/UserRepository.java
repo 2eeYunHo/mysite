@@ -18,9 +18,7 @@ public class UserRepository {
 		try {
 			connection = getConnection();
 
-			String sql = "insert " +
-					 	 "into user " +
-						 "values(null, ?, ?, ?, ?, now())";
+			String sql = "insert " + "into user " + "values(null, ?, ?, ?, ?, now())";
 			pstmt = connection.prepareStatement(sql);
 
 			pstmt.setString(1, vo.getName());
@@ -47,60 +45,56 @@ public class UserRepository {
 
 		return result;
 	}
-	
+
 	public UserVo findByEmailAndPassword(UserVo vo) {
 		UserVo result = null;
 		Connection connection = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		try {
 			connection = getConnection();
-			
-			//3. SQL 준비
-			String sql =
-					"select no, name"
-					+" from user"
-					+" where email = ?" 
-				    +" and password = ?";
+
+			// 3. SQL 준비
+			String sql = "select no, name" + " from user" + " where email = ?" + " and password = ?";
 			pstmt = connection.prepareStatement(sql);
-			
-			//binding
+
+			// binding
 			pstmt.setString(1, vo.getEmail());
 			pstmt.setString(2, vo.getPassword());
-			
-			//5. SQL 실행
+
+			// 5. SQL 실행
 			rs = pstmt.executeQuery();
-			
-			//6. 결과처리
-			if(rs.next()) {
+
+			// 6. 결과처리
+			if (rs.next()) {
 				Long no = rs.getLong(1);
 				String name = rs.getString(2);
-				
+
 				result = new UserVo();
 				result.setNo(no);
 				result.setName(name);
-				
+
 			}
 		} catch (SQLException e) {
 			System.out.println("드라이버 로딩 실패:" + e);
 		} finally {
 			try {
-				if(rs != null) {
+				if (rs != null) {
 					rs.close();
 				}
-				if(pstmt != null) {
+				if (pstmt != null) {
 					pstmt.close();
 				}
-				if(connection != null) {
+				if (connection != null) {
 					connection.close();
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		
-		return result;		
+
+		return result;
 	}
 
 	private Connection getConnection() throws SQLException {
@@ -114,5 +108,102 @@ public class UserRepository {
 			System.out.println("드라이버 로딩 실패:" + e);
 		}
 		return connection;
+	}
+
+	public UserVo findByNo(Long userNo) {
+		UserVo result = null;
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			conn = getConnection();
+
+			String sql = "select no, name, email, gender" + "  from user" + " where no=?";
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setLong(1, userNo);
+
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				Long no = rs.getLong(1);
+				String name = rs.getString(2);
+				String email = rs.getString(3);
+				String gender = rs.getString(4);
+
+				result = new UserVo();
+				result.setNo(no);
+				result.setName(name);
+				result.setEmail(email);
+				result.setGender(gender);
+			}
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return result;
+	}
+
+	public boolean update(UserVo vo) {
+		boolean result = false;
+		Connection connection = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			connection = getConnection();
+			if ("".equals(vo.getPassword())) {
+				String sql = "update user" + " set name = ? ,  gender = ?" + "	where no = ?";
+
+				pstmt = connection.prepareStatement(sql);
+
+				pstmt.setString(1, vo.getName());
+				pstmt.setString(2, vo.getGender());
+				pstmt.setLong(3, vo.getNo());
+			}
+
+			else {
+				String sql = "update user" + " set name = ? , password = ?, gender = ?" + "	where no = ?";
+
+				pstmt = connection.prepareStatement(sql);
+
+				pstmt.setString(1, vo.getName());
+				pstmt.setString(2, vo.getPassword());
+				pstmt.setString(3, vo.getGender());
+				pstmt.setLong(4, vo.getNo());
+			}
+			int count = pstmt.executeUpdate();
+			result = count == 1;
+		} catch (SQLException e) {
+			System.out.println("드라이버 로딩 실패:" + e);
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return result;
+
 	}
 }

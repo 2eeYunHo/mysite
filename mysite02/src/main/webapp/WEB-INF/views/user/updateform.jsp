@@ -1,7 +1,7 @@
 <%@page import="com.douzone.mysite.vo.UserVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <% 	
-	UserVo authUser = (UserVo)session.getAttribute("authUser");
+	UserVo userVo = (UserVo)request.getAttribute("userVo");
  %>
 <!DOCTYPE html>
 <html>
@@ -18,9 +18,9 @@
 				<form id="join-form" name="joinForm" method="post" action="<%=request.getContextPath() %>/user">
 					<input type='hidden' name='a' value='update' />
 					<label class="block-label" for="name">이름</label>
-					<input id="name" name="name" type="text" value="">
+					<input id="name" name="name" type="text" value="<%=userVo.getName()%>">
 					<label class="block-label" for="email">이메일</label>
-					<h4><%=authUser.getEmail() %></h4>
+					<h4><%=userVo.getEmail()%></h4>
 					
 					<label class="block-label">패스워드</label>
 					<input name="password" type="password" value="">
@@ -37,6 +37,6 @@
 		</div>
 		<jsp:include page="/WEB-INF/views/includes/navigation.jsp" />
 		<jsp:include page="/WEB-INF/views/includes/footer.jsp" />
-	</div>
+	</div> 
 </body>
 </html>
