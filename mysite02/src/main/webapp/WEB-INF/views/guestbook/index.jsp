@@ -4,12 +4,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%pageContext.setAttribute("newLine", "\n");%>
 
-<%@page import="java.util.List"%>
-<%@page import="com.douzone.mysite.repository.GuestBookRepository"%>
-<%@page import="com.douzone.mysite.vo.GuestBookVo"%>
-<%
-	List<GuestBookVo> list = (List<GuestBookVo>)request.getAttribute("list");
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,30 +33,27 @@
 				</form>
 				
 				<ul>
-					<%
-						int count = list.size();
-						int index = 0;
-						for(GuestBookVo vo : list){
-					%>
+					<c:set var='count' value = '${fn:length(list) }'/>
+					<c:forEach items = '${list}' var='vo' varStatus='status'>
 						<li>
 							<table>
-								<tr>
-									<td>[<%=count-index++ %>]</td>
-									<td><%=vo.getName() %></td>
-									<td><%=vo.getReg_date() %></td>
-									<td><a href="${pageContext.request.contextPath}/guestbook?a=deleteform&no=<%=vo.getNo() %>">삭제</a></td>
+					 				<tr>
+									<td>${count-status.index}</td> 
+									<td>${vo.name }</td>
+									<td>${vo.reg_date} </td>
+									<td><a href='${pageContext.request.contextPath }/guestbook?a=deleteform&no=${vo.no }'>삭제</a></td>
+									<br/>	
+									
 								</tr>
 								<tr>
 									<td colspan=4>
-										'${fn:replace(vo.message, newLine, "<br/>")}'
+										${fn:replace(vo.message, newLine, "<br/>")}
 									</td>
 								</tr>
 							</table>
 							<br>
 						</li>
-					<%
-						}
-					%>
+					</c:forEach>
 				</ul>
 			</div>
 		</div>

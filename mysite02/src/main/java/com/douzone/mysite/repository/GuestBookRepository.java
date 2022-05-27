@@ -63,7 +63,7 @@ public class GuestBookRepository {
 			String sql =
 					"select no, name, date_format(reg_date, '%Y-%m-%d %H:%i:%s'), message"
 					+" from guestbook"
-				    +" order by no asc";
+				    +" order by no desc";
 			pstmt = connection.prepareStatement(sql);
 			
 			//4. Parameter Mapping
