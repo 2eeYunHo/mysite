@@ -26,9 +26,9 @@
 							로그인이 실패 했습니다.
 						</p>
 					</c:if>
-					
-					<input id="email" name='email' type="text" value='${email }'>
 					<input type="submit" value="로그인">
+					
+
 				</form>
 			</div>
 		</div>

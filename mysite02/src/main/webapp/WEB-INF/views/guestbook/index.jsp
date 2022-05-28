@@ -33,12 +33,14 @@
 				</form>
 				
 				<ul>
-					<c:set var='count' value = '${fn:length(list) }'/>
+					<c:set var='count' value = '${fn:length(list) }'/>  
+					<!-- var변수선언 =count| fn:는 함수사용선언 length를 사용하겠다 선언함 -->
 					<c:forEach items = '${list}' var='vo' varStatus='status'>
 						<li>
 							<table>
 					 				<tr>
 									<td>${count-status.index}</td> 
+								<!-- count는 위set에서 선언함list만큼 (-)  status.index 0에서 부터 -->
 									<td>${vo.name }</td>
 									<td>${vo.reg_date} </td>
 									<td><a href='${pageContext.request.contextPath }/guestbook?a=deleteform&no=${vo.no }'>삭제</a></td>

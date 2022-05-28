@@ -18,6 +18,6 @@ select no, name, email, gender
 	from user
 	where name = 'qwe' 
     and password = 'qwe';
+select *
+	from guestbook
 
-update user set name, password, gender
-	where name = ?, password = ?, gender = ?;
