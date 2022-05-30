@@ -40,7 +40,7 @@
 							<table>
 					 				<tr>
 									<td>${count-status.index}</td> 
-								<!-- count는 위set에서 선언함list만큼 (-)  status.index 0에서 부터 -->
+									<!-- count는 위set에서 선언함list만큼 (-)  status.index 0에서 부터 -->
 									<td>${vo.name }</td>
 									<td>${vo.reg_date} </td>
 									<td><a href='${pageContext.request.contextPath }/guestbook?a=deleteform&no=${vo.no }'>삭제</a></td>
