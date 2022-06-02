@@ -154,6 +154,8 @@ public class GuestBookRepository {
 		}
 		
 		return connection;
-	}	
+	}
+
+
 	
 }

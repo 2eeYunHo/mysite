@@ -22,10 +22,9 @@ public class Delete implements Action {
 		GuestBookVo vo = new GuestBookVo();
 		vo.setNo(no);
 		vo.setPassword(password);
-		
 		new GuestBookRepository().delete(vo);
 		
-		//.2 
+		//.2
 		WebUtil.redirect(request, response, request.getContextPath() + "/guestbook");
 		// list -add(화면 없으니 리다이렉트) - deleteform - delete(화면 없으니 리다이렉트)
 	}
