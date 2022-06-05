@@ -30,6 +30,7 @@ public class WriteAction implements Action {
 			WebUtil.redirect(request, response, request.getContextPath() + "/board?a=writeform");
 			return;
 		}
+		String no = request.getParameter("no");
 		String group_no = request.getParameter("group_no");
 		String order_no = request.getParameter("order_no");
 		String depth = request.getParameter("depth");
@@ -42,16 +43,24 @@ public class WriteAction implements Action {
 		vo.setContents(contents);
 		vo.setUser_no(authUser.getNo());
 		System.out.println(vo);
-		if ("".equals(group_no) || "".equals(order_no) || "".equals(depth)) {
+		System.out.println(group_no + "," + order_no + "," + depth);
+		if("".equals(group_no) || "".equals(order_no) || "".equals(depth)) {
 			new BoardRepository().insert(vo);
+			System.out.println("INSERT");
 			WebUtil.redirect(request, response, request.getContextPath() + "/board");
 			return;
 		}
+		if(group_no == null || order_no == null || depth == null) {
+			new BoardRepository().insert(vo);
+			System.out.println("INSERT");
+			WebUtil.redirect(request, response, request.getContextPath() + "/board");
+			return;
+		}
+		vo.setNo(Long.parseLong(no));
 		vo.setGroup_no(Long.parseLong(group_no));
 		vo.setOrder_no(Long.parseLong(order_no));
 		vo.setDepth(Long.parseLong(depth));
-
-		new BoardRepository().insert(vo);
+		new BoardRepository().reply(vo);
 		WebUtil.redirect(request, response, request.getContextPath() + "/board");
 	}
 }

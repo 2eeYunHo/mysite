@@ -1,6 +1,7 @@
 package com.douzone.mysite.web.mvc.board;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -16,9 +17,43 @@ public class IndexAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<BoardVo> list = new BoardRepository().findAll();
+		
+		String pageNum = request.getParameter("p");
+		
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		int limit = 5;
+		
+		HashMap<String, Integer> pages = new HashMap<String, Integer>();
+		int currentPage = Integer.parseInt(pageNum);
+		
+		int startPage = limit * ((int)Math.ceil((double)currentPage / limit)-1)+1;
+		if(startPage < 1) {
+			startPage = 1;
+		}
+		
+		
+		int totalPage = (new BoardRepository().count() % limit) == 0 ? new BoardRepository().count()/limit : new BoardRepository().count()/limit+1;
+		int lastPage = startPage + (limit - 1) > totalPage ? totalPage : startPage + (limit-1);
+		int prevPage = currentPage - 1 < 0 ? 1 : currentPage - 1;
+		int nextPage = currentPage + 1 > totalPage ? totalPage : currentPage + 1;
+		
+		pages.put("currentPage", currentPage);
+		pages.put("startPage", startPage);
+		pages.put("totalPage", totalPage);
+		pages.put("lastPage", lastPage);
+		pages.put("prevPage", prevPage);
+		pages.put("nextPage", nextPage);
+		
+		int totalBoard = new BoardRepository().count();
+		request.setAttribute("totalBoard", totalBoard);
+		
+		List<BoardVo> list = new BoardRepository().findAll(currentPage);
 		request.setAttribute("list", list);
-		System.out.println(list);
-		WebUtil.forward(request, response, "/board/index");
+		request.setAttribute("pages", pages);
+		WebUtil.forward(request, response, "board/index");
+
 	}
+
 }

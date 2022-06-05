@@ -16,7 +16,6 @@ public class BoardController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// 액션으로 처리하게끔
 		String actionName = request.getParameter("a");
 		ActionFactory af = new BoardActionFactory();
 		Action action = af.getAction(actionName);

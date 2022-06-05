@@ -16,32 +16,33 @@
 			<div id="board">
 				<form class="board-form" method="post" action="${pageContext.request.contextPath }/board">
 					<input type = "hidden" name = "a" value="write"/>
-					<input type="hidden" name="group_no" value="${vo.group_no }">
-					<input type="hidden" name="order_no" value="${vo.order_no }">
-					<input type="hidden" name="depth" value="${vo.depth }">
+					<input type = "hidden" name = 'no' value = '${param.no }'/>			
+					<input type="hidden" name="group_no" value="${param.group_no }">
+					<input type="hidden" name="order_no" value="${param.order_no }">
+					<input type="hidden" name="depth" value="${param.depth }">
 					<table class="tbl-ex">
 						<tr>
 							<th colspan="2">글쓰기</th>
 						</tr>
 						<tr>
 							<td class="label">제목</td>
-							<td><input type="text" name="title" value="" ></td>
+							<td><input type="text" name="title" value="" required ></td>
 						</tr>
 						<tr>
 							<td class="label">내용</td>
 							<td>
-								<textarea id="contents" name="contents"></textarea>
+								<textarea id="contents" name="contents" ></textarea>
 							</td>
 						</tr>
 					</table>
 					<div class="bottom">
 						<a href="${pageContext.servletContext.contextPath }/board?a=index">취소</a>
 						<input type="submit" value="등록">
-					</div>
+					</div>	
 				</form>				
 			</div>
 		</div>
-		<c:import url="/WEB-INF/views/includes/navigation.jsp" />
+		<c:import url="/WEB-INF/views/includes/navigation.jsp"/>
 		<c:import url="/WEB-INF/views/includes/footer.jsp" />
 	</div>
 </body>
