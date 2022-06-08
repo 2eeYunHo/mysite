@@ -42,7 +42,6 @@
 		<servlet-name>dispatcher</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>	
-	<!-- 상단에 / 위치를 defaultServlet Handler를 만들어 줘야함 -->
 
 	<!-- 공통 Error Page -->
 	<error-page>
@@ -53,6 +52,7 @@
 		<error-code>404</error-code>
 		<location>/WEB-INF/views/error/404.jsp</location>
 	</error-page>
+	
 	<!-- Welcome Files -->
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>

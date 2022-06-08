@@ -19,7 +19,7 @@
 
 	<!-- 서블릿 컨테이너의 디폴트 서블릿 위임 핸들러 -->
 	<mvc:default-servlet-handler/>
-
+	
 	<!-- ViewResolver 설정 -->	
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
    		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />

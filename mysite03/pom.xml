@@ -24,12 +24,41 @@
 		    <version>${org.springframework-version}</version>
 		</dependency>
 		
-		<!-- Spring MVC -->
+		<!-- Spring MVC --> 
 		<dependency>
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-webmvc</artifactId>
 		    <version>${org.springframework-version}</version>
 		</dependency>
+
+		<!-- Spring JDBC -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-jdbc</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
+
+		<!-- Common DBCP -->
+		<dependency>
+		    <groupId>commons-dbcp</groupId>
+		    <artifactId>commons-dbcp</artifactId>
+		    <version>1.4</version>
+		</dependency>
+		
+		<!-- MyBatis Core -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.5.9</version>
+		</dependency>
+		
+		<!-- MyBatis Spring -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>2.0.7</version>
+		</dependency>
+
 		
 		<!-- MariaDB JDBC Driver -->
 		<dependency>
@@ -73,12 +102,12 @@
 			    <artifactId>tomcat-maven-plugin</artifactId>
 			    <version>1.1</version>
 			    <configuration>
-			    	<url>http://192.168.0.146:8080/manager/text</url>
-			    	<path>/mysite03</path>
-			    	<username>llyn99</username>
-			    	<password>llyn99</password>
-			    </configuration>
-			</plugin>			
+					<url>http://192.168.0.146:8080/manager/text</url>
+					<path>/mysite03</path>
+					<username>llyn99</username>
+					<password>llyn99</password>
+				</configuration>
+			</plugin>
 		</plugins>
-	</build>	
+	</build>
 </project>

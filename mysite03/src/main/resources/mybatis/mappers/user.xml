@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user">
+	<insert id= "insert" parameterType = "uservo">
+	<!-- CDATA는 마크업설정을 제외시켜주어 예외를 미리 방지가 가능하게끔함 -->
+	<![CDATA[ 
+	 insert 
+		into user 
+		values(null, #{name }, #{email }, #{password }, #{gender }, now())
+	]]><!-- Mapping 작업 -->
+	</insert>
+</mapper>

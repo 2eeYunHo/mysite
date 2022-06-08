@@ -1,13 +1,15 @@
 package com.douzone.mysite.repository;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.douzone.mysite.exception.GuestbookRepositoryException;
@@ -15,17 +17,18 @@ import com.douzone.mysite.vo.GuestbookVo;
 
 @Repository
 public class GuestBookRepository {
-	
+	@Autowired
+	private DataSource dataSource;
 	public boolean add(GuestbookVo vo) {
 		boolean result = false;
 		Connection connection = null;
 		PreparedStatement pstmt = null;
 		
 		try {
-			connection = getConnection();
+			connection = dataSource.getConnection();
 			
 			String sql =
-				" inser" +
+				" insert" +
 				" into guestbook" +
 				" values (null, ?, ?, ?, now())";
 			pstmt = connection.prepareStatement(sql);
@@ -62,7 +65,7 @@ public class GuestBookRepository {
 		ResultSet rs = null;
 		
 		try {
-			connection = getConnection();
+			connection = dataSource.getConnection();
 			
 			//3. SQL 준비
 			String sql =
@@ -117,7 +120,7 @@ public class GuestBookRepository {
 		PreparedStatement pstmt = null;
 		
 		try {
-			connection = getConnection();
+			connection = dataSource.getConnection();
 			
 			String sql =
 			"delete from guestbook" +
@@ -147,19 +150,6 @@ public class GuestBookRepository {
 		
 		return result;		
 	}
-	private Connection getConnection() throws SQLException {
-		Connection connection = null;
-		
-		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-			String url = "jdbc:mysql://192.168.0.146:3306/webdb?charset=utf8";
-			connection = DriverManager.getConnection(url, "webdb", "webdb");
-		} catch (ClassNotFoundException e) {
-			System.out.println("드라이버 로딩 실패:" + e);
-		}
-		
-		return connection;
-	}
 
 	//guestbook service 용
 	public Boolean delete(Long no, String password) {
@@ -168,7 +158,7 @@ public class GuestBookRepository {
 		PreparedStatement pstmt = null;
 		
 		try {
-			connection = getConnection();
+			connection = dataSource.getConnection();
 			
 			String sql =
 			"delete from guestbook" +
