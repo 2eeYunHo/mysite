@@ -1,32 +1,50 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.douzone</groupId>
-    <artifactId>mysite</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-  </parent>
-  	<properties>
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.douzone</groupId>
+		<artifactId>mysite</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>mysite03</artifactId>
+	<packaging>war</packaging>
+	
+	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.build.outputEncoding>UTF-8</project.build.outputEncoding>
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
 		<org.springframework-version>5.3.18</org.springframework-version>
-
 	</properties>
 
 	<dependencies>
+		<!-- Spring Context -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
+		
+		<!-- Spring MVC -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-webmvc</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
+		
 		<!-- MariaDB JDBC Driver -->
 		<dependency>
 		    <groupId>org.mariadb.jdbc</groupId>
 		    <artifactId>mariadb-java-client</artifactId>
 		    <version>2.7.5</version>
 		</dependency>
+				
 		<!-- JSTL -->
 		<dependency>
 		    <groupId>jstl</groupId>
-    		<artifactId>jstl</artifactId>
-   			<version>1.2</version>
+		    <artifactId>jstl</artifactId>
+		    <version>1.2</version>
 		</dependency>
+				
 		<!-- Servlet -->
 		<dependency>
 		    <groupId>javax.servlet</groupId>
@@ -39,11 +57,11 @@
 		    <artifactId>jsp-api</artifactId>
 		    <version>2.2</version>
 		    <scope>provided</scope>
-		</dependency>
+		</dependency>	
 	</dependencies>
 	
 	<build>
-		<finalName>mysite02</finalName>
+		<finalName>mysite03</finalName>
 		<plugins>
 			<plugin>
 			    <groupId>org.apache.maven.plugins</groupId>
@@ -56,13 +74,11 @@
 			    <version>1.1</version>
 			    <configuration>
 			    	<url>http://192.168.0.146:8080/manager/text</url>
-			    	<path>/mysite02</path>
+			    	<path>/mysite03</path>
 			    	<username>llyn99</username>
 			    	<password>llyn99</password>
 			    </configuration>
 			</plugin>			
 		</plugins>
 	</build>	
-  <artifactId>mysite02</artifactId>
-  <packaging>war</packaging>
 </project>
