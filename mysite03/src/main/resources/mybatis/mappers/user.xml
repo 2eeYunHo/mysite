@@ -3,10 +3,64 @@
 <mapper namespace="user">
 	<insert id= "insert" parameterType = "uservo">
 	<!-- CDATA는 마크업설정을 제외시켜주어 예외를 미리 방지가 가능하게끔함 -->
+	
 	<![CDATA[ 
 	 insert 
 		into user 
 		values(null, #{name }, #{email }, #{password }, #{gender }, now())
 	]]><!-- Mapping 작업 -->
 	</insert>
+	
+	<select id="findByEmailAndPassword" parameterType="uservo" resultType = "uservo">
+		<![CDATA[
+		 select no, name 
+			from user" 
+			where email = #{email }
+			and password = #{password }
+		]]>
+	</select>
+	
+	<select id="findByNo" parameterType="uservo" resultType = "uservo">
+		<![CDATA[
+		select no, name, email, gender
+			from user 
+			where no=#{no }
+		]]>
+	</select>
+	
+	<update id= "update" parameterType = "uservo">	
+		<choose>
+			<when test='password == ""'>
+				<![CDATA[ 
+				update user 
+					set name = #{name } , gender = #{gender } 
+					where no = #{no }
+				]]><!-- Mapping 작업 -->
+			</when>
+			<otherwise>
+				<![CDATA[ 
+				update user 
+					set name = #{name } , password =#{password }, gender = #{gender }
+					where no = #{no }
+				]]>
+			</otherwise>
+		</choose>
+	</update>
+	
+	<update id= "update1" parameterType = "uservo">	
+	<![CDATA[ 
+	update user 
+		set name = #{name } , gender = #{gender } 
+		where no = #{no }
+	]]><!-- Mapping 작업 -->
+	</update>
+	
+	<update id= "update2" parameterType = "uservo">	
+	<![CDATA[ 
+	update user 
+		set name = #{name } , password =#{password }, gender = #{gender }
+		where no = #{no }
+
+	]]><!-- Mapping 작업 -->
+	</update>
 </mapper>
