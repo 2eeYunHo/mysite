@@ -9,10 +9,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>예기치 않은 Error(Internal Server Error 500) - Lollllllllllllllllllllllllllll</h1>
+	<h1>예기치 않은 오류(Internal Server Error 500) - Ooooooops</h1>
 	<p>
-		스미마셍. 요청하신 페이지와 아리마셍 데스;<br/>
-		고멘, 고란노 스폰서데 오쿠리시마스
+		죄송합니다. 오류가 발생했습니다.<br/>
+		잠시 후, 다시 시도해 주세요.
 	</p>
 </body>
 </html>
