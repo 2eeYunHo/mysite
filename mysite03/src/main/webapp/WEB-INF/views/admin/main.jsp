@@ -23,7 +23,8 @@
 						<input id="welcomeMessage" name="welcomeMessage" type="text" value="${site.welcomeMessage }">
 
 						<label class="block-label">프로필 이미지</label>
-						<img id="profile" src="${pageContext.request.contextPath }/${site.profileURL }">
+						<img id="profile" src="${pageContext.request.contextPath }${site.profileUrl }">
+						<input type="hidden" name="profileUrl" value="${site.profileUrl }" />
 						<input type="file" name="file">
 
 						<label class="block-label">사이트 설명</label>
@@ -31,9 +32,6 @@
 						
 						<input type="submit" value="변경" />
 					</form>
-									
-				
-
 				</div>
 			</div>
 			<c:import url="/WEB-INF/views/admin/include/navigation.jsp">

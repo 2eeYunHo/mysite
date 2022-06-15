@@ -4,6 +4,7 @@ import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,36 +29,37 @@ public class AdminController {
 	private FileUploadService fileUploadService;
 	
 	@RequestMapping("")
-	public String main() {
+	public String main(Model model) {
+		SiteVo site = siteService.getSite();
+		model.addAttribute("site", site);
 		return "admin/main";
 	}
-	
+
 	@RequestMapping("/main/update")
-	public String update(
-		SiteVo vo,
-		@RequestParam("file") MultipartFile multipartFile) {
+	public String main(SiteVo site, @RequestParam("file") MultipartFile file) {
+		String profileurl = fileUploadService.restoreImage(file);
 		
-		String url = fileUploadService.restoreImage(multipartFile);
-		vo.setProfileURL(url);
+		if(profileurl != null) {
+			site.setProfileUrl(profileurl);
+		}
 		
-		// siteService.updateSite(vo);
-
-		return "redirect:/admin/main";
-	}
-
-	@RequestMapping("/guestbook")
-	public String guestbook() {
-		return "admin/guestbook";
+		siteService.update(site);
+		servletContext.setAttribute("site", site);
+		return "redirect:/admin";
 	}
 	
 	@RequestMapping("/board")
 	public String board() {
 		return "admin/board";
 	}
-	
+
+	@RequestMapping("/guestbook")
+	public String guestbook() {
+		return "admin/guestbook";
+	}
+
 	@RequestMapping("/user")
 	public String user() {
 		return "admin/user";
-	}
-	
+	}	
 }
