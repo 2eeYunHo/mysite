@@ -146,8 +146,8 @@
 			    <configuration>
 			    	<url>http://192.168.0.146:8080/manager/text</url>
 			    	<path>/mysite03</path>
-			    	<username>llyn99</username>
-			    	<password>llyn99</password>
+			    	<username>admin</username>
+			    	<password>manager</password>
 			    </configuration>
 			</plugin>			
 		</plugins>
