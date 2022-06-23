@@ -1,4 +1,4 @@
-package com.douzone.mtsite;
+package com.douzone.mysite;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
